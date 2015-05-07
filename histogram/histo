@@ -1,0 +1,32 @@
+#!/usr/local/bin/escript 
+
+main([Filename]) ->
+    case file:open(Filename,read) of
+	{ok,IoDevice} ->
+	    Histo = process_file(IoDevice,dict:new()),
+	    [ io:format("~s: ~w~n", [K,V]) || {K,V} <- dict:to_list(Histo) ];
+	{error,Reason} ->
+	    io:format("~s~n",[Reason])
+    end;
+main(_) ->
+    io:format("Usage:~n~n histo <filename>~n"),
+    halt(1).
+
+%% process_file/2
+%%
+%% Reads a line from the specified file, and adds the words from this line
+%% into the histogram
+process_file([],Histo) -> Histo;
+process_file(IoDevice,Histo) ->
+    case io:get_line(IoDevice,"") of
+	eof ->
+	    file:close(IoDevice),
+	    Histo;
+	{error,Reason} ->
+	    file:close(IoDevice),
+	    throw(Reason);
+	Line ->
+	    NewHisto = histo:word_histogram(Line, Histo),
+	    process_file(IoDevice,NewHisto)
+    end.
+
