@@ -1,0 +1,11 @@
+#!/usr/local/bin/escript 
+main([Verses]) ->
+    case string:to_integer(Verses) of
+	{error,_} -> usage();
+	{N,_} -> beersong:sing(N)
+    end;
+main(_) ->
+    usage().
+
+usage() ->
+    io:format("Usage:~n beersong N~n").
