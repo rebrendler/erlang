@@ -4,16 +4,16 @@
 -export([print_verse/3]).
 
 print_verse(Count,Remain) ->
-    print_verse(Count, "take one down and pass it around", Remain).
+    print_verse(Count, "Take one down and pass it around", Remain).
 
 print_verse(Count, Action, Remain) ->
-    io:fwrite("~s of beer on the wall, ~s of beer.~n", [Count, Count]),    
+    io:fwrite("~s of beer on the wall, ~s of beer.~n", [Count, string:to_lower(Count)]),    
     io:fwrite("~s, ~s of beer on the wall.~n", [Action, Remain]).
 
 
 verse(N,Total) ->
     case N of
-	0 -> print_verse("no more bottles", "go to the store and get some more", io_lib:format("~b bottles",[Total]));
+	0 -> print_verse("No more bottles", "Go to the store and get some more", io_lib:format("~b bottles",[Total]));
 	1 -> 
 	    print_verse("1 bottle", "no more bottles"), 
 	    verse(0,Total);
