@@ -8,7 +8,7 @@ print_verse(Count,Remain) ->
 
 print_verse(Count, Action, Remain) ->
     io:fwrite("~s of beer on the wall, ~s of beer.~n", [Count, string:to_lower(Count)]),    
-    io:fwrite("~s, ~s of beer on the wall.~n", [Action, Remain]).
+    io:fwrite("~s, ~s of beer on the wall.~n~n", [Action, Remain]).
 
 
 verse(N,Total) ->
