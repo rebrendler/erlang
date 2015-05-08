@@ -1,10 +1,6 @@
 -module('anagram').
 -export([is_anagram/2]).
 
-%% letter_histogram/2
-%%
-%% Create a dictionary containing the counts of every letter in
-%% the specified string
 letter_histogram(String) ->
      count_letters(String,dict:new()).
     

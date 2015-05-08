@@ -34,10 +34,6 @@ words(String) ->
 	nomatch -> []
     end.
 
-%% count_words/2
-%%
-%% Increments the count for a specific word in the histogram, and returns
-%% a new histogram
 count_words([],Dict) -> Dict;
 count_words([Word|Remainder], Dict) ->
     NewDict = dict:update_counter(Word,1,Dict),
